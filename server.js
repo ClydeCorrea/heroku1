@@ -28,13 +28,13 @@ app.post("/addUsers", addUsers.add_users);
 // app.post("/api/removehero", removeHero.removeHero);
 
 //All get Methods
-app.get("/getUsers", getUsers.get_users);
-app.get('/', function(req, res) {
-	res.json({
-		status: true,
-		message: "Welcome jayesh"
-	})
-});
+app.get("/", getUsers.get_users);
+// app.get('/', function(req, res) {
+// 	res.json({
+// 		status: true,
+// 		message: "Welcome jayesh"
+// 	})
+// });
 
 app.listen(port, () => {
   console.log("Server Up"+ port)

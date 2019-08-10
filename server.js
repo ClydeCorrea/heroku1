@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+var port = process.env.PORT || 8080;
 const app = express();
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -22,19 +22,21 @@ var getUsers = require("./controller/getUsers");
 
 // //All post methods
 // app.post("/api/updatehero", updateHero.updateHero);
-app.get("/", function(){
-  res.json({
-    status: true,
-    message: "Welcome Jay"
-})
-});
 
 app.post("/addUsers", addUsers.add_users);
 // app.post("/api/removehero", removeHero.removeHero);
 
 //All get Methods
 app.get("/getUsers", getUsers.get_users);
+app.get('/', function(req, res) {
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Server Up")
+	// ejs render automatically looks in the views folder
+	res.json({
+		status: true,
+		message: "Welcome Jay"
+	})
+});
+
+app.listen(port, () => {
+  console.log("Server Up"+ port)
 });

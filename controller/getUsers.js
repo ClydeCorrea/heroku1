@@ -4,10 +4,7 @@ const sql = require("mssql");
 
 
 module.exports.get_users = function (req, res) {
-    if (req.query.deviceId) {
-        var deviceT = req.query.deviceId;
-        console.log(deviceT, "find");
-
+    console.log("check_ heroku");
         var request = new sql.Request();
         sql.connect(config, function (err) {
             if (err) console.log(err);
@@ -31,5 +28,4 @@ module.exports.get_users = function (req, res) {
                 }
             })
         })
-    }
 }

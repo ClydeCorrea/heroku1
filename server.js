@@ -29,8 +29,6 @@ app.post("/addUsers", addUsers.add_users);
 //All get Methods
 app.get("/getUsers", getUsers.get_users);
 app.get('/', function(req, res) {
-
-	// ejs render automatically looks in the views folder
 	res.json({
 		status: true,
 		message: "Welcome jayesh"

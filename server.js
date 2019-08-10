@@ -33,7 +33,7 @@ app.get('/', function(req, res) {
 	// ejs render automatically looks in the views folder
 	res.json({
 		status: true,
-		message: "Welcome Jay"
+		message: "Welcome jayesh"
 	})
 });
 

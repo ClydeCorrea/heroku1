@@ -1,32 +1,31 @@
+"use strict";
 const config = require("../config");
 const sql = require("mssql");
 // const oracledb = require("oracledb");
 
 
 module.exports.get_users = function (req, res) {
-    console.log("check_ heroku");
-        var request = new sql.Request();
         sql.connect(config, function (err) {
-            if (err) console.log(err);
-            request.query("SELECT * FROM Pwa_users", function (error, results, fields) {
-                if (error) {
-                    console.log(error);
-                    res.json({
-                        data:error,
-                        status: false,
-                        message: "there are some error with query"
-                    })
-                } else {
-                    console.log(results, "pakad");
-                    if (results != "" && results != null && results != undefined) {
+            if (err) {
+                console.log("Error while connecting database :- " + err);
+                // res.send(err);
+            } else {
+                // create Request object
+                var request = new sql.Request();
+                // query to the database
+                var query = "select * from Pwa_users";
+                request.query(query, function (err, results,fields) {
+                    if (err) {
+                        console.log("Error while querying database :- " + err);
+                        // res.send(err);
+                    } else {
                         res.json({
-                            data: results,
+                            data:results,
                             status: true,
-                            message: "Data get from sql"
+                            message: "User added to database"
                         })
                     }
-
-                }
-            })
-        })
+                });
+            }
+        });
 }

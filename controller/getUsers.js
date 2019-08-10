@@ -12,6 +12,7 @@ module.exports.get_users = function (req, res) {
                 if (error) {
                     console.log(error);
                     res.json({
+                        data:error,
                         status: false,
                         message: "there are some error with query"
                     })

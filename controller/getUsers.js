@@ -1,12 +1,13 @@
 const config = require("../config");
 const sql = require("mssql");
+var connect= config.connection;
 // const oracledb = require("oracledb");
 
 
 module.exports.get_users = function (req, res) {
     console.log("check_ heroku");
         var request = new sql.Request();
-        sql.connect(config, function (err) {
+        sql.connect(connect, function (err) {
             if (err) console.log(err);
             request.query("SELECT * FROM Pwa_users", function (error, results, fields) {
                 if (error) {

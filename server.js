@@ -28,7 +28,7 @@ app.post("/addUsers", addUsers.add_users);
 // app.post("/api/removehero", removeHero.removeHero);
 
 //All get Methods
-app.get("/", getUsers.get_users);
+app.get("/getUsers", getUsers.get_users);
 // app.get('/', function(req, res) {
 // 	res.json({
 // 		status: true,

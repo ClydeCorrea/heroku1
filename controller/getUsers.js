@@ -1,31 +1,35 @@
-"use strict";
 const config = require("../config");
 const sql = require("mssql");
 // const oracledb = require("oracledb");
 
 
 module.exports.get_users = function (req, res) {
+    if (req.query.deviceId) {
+        var deviceT = req.query.deviceId;
+        console.log(deviceT, "find");
+
+        var request = new sql.Request();
         sql.connect(config, function (err) {
-            if (err) {
-                console.log("Error while connecting database :- " + err);
-                // res.send(err);
-            } else {
-                // create Request object
-                var request = new sql.Request();
-                // query to the database
-                var query = "select * from Pwa_users";
-                request.query(query, function (err, results,fields) {
-                    if (err) {
-                        console.log("Error while querying database :- " + err);
-                        // res.send(err);
-                    } else {
+            if (err) console.log(err);
+            request.query("SELECT * FROM Pwa_users WHERE device_t='" + deviceT + "' ", function (error, results, fields) {
+                if (error) {
+                    console.log(error);
+                    res.json({
+                        status: false,
+                        message: "there are some error with query"
+                    })
+                } else {
+                    console.log(results, "pakad");
+                    if (results != "" && results != null && results != undefined) {
                         res.json({
-                            data:results,
+                            data: results,
                             status: true,
-                            message: "User added to database"
+                            message: "Data get from sql"
                         })
                     }
-                });
-            }
-        });
+
+                }
+            })
+        })
+    }
 }
